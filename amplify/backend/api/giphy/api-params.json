@@ -1,0 +1,34 @@
+{
+    "paths": [
+        {
+            "name": "/gifs",
+            "lambdaFunction": "giphy",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "giphy",
+    "apiName": "giphy",
+    "functionArns": [
+        {
+            "lambdaFunction": "giphy"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-giphit-dev-161359-authRole",
+        "unAuthRoleName": "amplify-giphit-dev-161359-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "giphy",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

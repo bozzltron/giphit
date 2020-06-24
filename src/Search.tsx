@@ -11,7 +11,6 @@ function Search() {
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
   const gifs = useSelector((state: RootState) => state.gifs)
-  const [offset, setOffset] = useState(gifs.data.length);
   const offsetAmount = 25;
   const placeholders = []
   for (let i=0; i < offsetAmount; i++) {

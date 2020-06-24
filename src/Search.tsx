@@ -5,6 +5,7 @@ import { fetchGifsActionCreator } from './redux/actions'
 import { RootState } from './redux/reducer'
 import useWebP from './useWebp'
 import searchIcon from './search-icon.svg';
+import Gif from './Gif'
 
 function Search() {
   const supportsWebP = useWebP();
@@ -45,9 +46,10 @@ function Search() {
       <div className="container">
         {
           (gifs.data.length) ? gifs.data.map((gif: any, i:number)=>
-            <div key={i} className="item">
-              <img src={ supportsWebP ? gif.images.preview_webp.url : gif.images.preview_gif.url } alt={gif.title} />
-            </div> 
+            <Gif key={i} 
+              preview={supportsWebP ? gif.images.preview_webp.url : gif.images.preview_gif.url} 
+              original={supportsWebP ? gif.images.original.webp :  gif.images.original.url } 
+              title={gif.title}  />
           ) : null
         }
         {

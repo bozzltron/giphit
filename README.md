@@ -49,3 +49,5 @@ Implement, deploy, and test giphy lambda, setup redux
 Wire up redux using typescript 
 Integrate components
 Styling and UX testing
+Infinite Scroll
+Original Image Overlay

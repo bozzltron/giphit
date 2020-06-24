@@ -1,6 +1,8 @@
 const fetch = require('node-fetch');
 
 exports.handler = async (event) => {
+    
+    console.log('event', event);
 
     let response, res;
 
@@ -8,12 +10,14 @@ exports.handler = async (event) => {
 
         let url; 
 
-        if (event.query && event.query.q && event.query.q !== '') {
+        if (event.queryStringParameters && event.queryStringParameters.q && event.queryStringParameters.q !== '') {
             url = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}
-                    &offset=${event.query.offset || 0}&limit=100&q=${event.query.q}`;
+                    &offset=${event.queryStringParameters.offset || 0}&limit=100&q=${event.queryStringParameters.q}`;
         } else {
             url = `https://api.giphy.com/v1/gifs/trending?api_key=${process.env.GIPHY_API_KEY}`;
         }
+
+        console.log('url', url);
 
         res = await fetch(url).then(res => res.json())
 

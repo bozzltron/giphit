@@ -27,7 +27,8 @@ export interface Gif {
 
 export interface MediaTypes {
   preview: Video,
-  original_mp4: Video
+  original_mp4: Video,
+  preview_webp: object
 }
 
 export interface Video {

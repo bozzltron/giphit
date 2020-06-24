@@ -1,12 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchGifsActionCreator } from './redux/actions'
 import { RootState } from './redux/reducer'
+import useWebP from './useWebp'
+import searchIcon from './search-icon.svg';
 
 function Search() {
+  const supportsWebP = useWebP();
+  const [query, setQuery] = useState('');
   const dispatch = useDispatch();
   const gifs = useSelector((state: RootState) => state.gifs)
+  const offset = 25;
+  const placeholders = new Array(offset)
   console.log("gifs", gifs);
   
   useEffect(() => {
@@ -15,15 +21,18 @@ function Search() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <input type="search" />
+    <div className="app">
+      <header className="search">
+        <input type="search" placeholder="Search for gifs" onChange={(e)=>{ setQuery(e.target.value) }} />
+        <button onClick={()=>{ dispatch(fetchGifsActionCreator(query)) }}><img src={searchIcon} alt="search icon" /></button>
       </header>
-      <div className="content">
+      <div className="container">
         {
           (gifs && gifs.data && gifs.data.length > 0) ? gifs.data.map((gif: any, i:number)=>
-            <video key={i} src={gif.images.preview.mp4} />
-          ) : null
+            <div className="item">
+              <img key={i} src={ supportsWebP ? gif.images.preview_webp.url : gif.images.preview_gif.url } alt={gif.title} />
+            </div>
+          ) : placeholders.map(()=><div className="item"><div className="placeholder"></div></div>)
         }
       </div>
     </div>

@@ -44,10 +44,18 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Dev log
-Initial project setup (React with Typescript, Amplify) and deployment test 
-Implement, deploy, and test giphy lambda, setup redux 
-Wire up redux using typescript 
-Integrate components
-Styling and UX testing
-Infinite Scroll
-Original Image Overlay
+Initial project setup (React with Typescript, Amplify) and deployment test  
+Implement, deploy, and test giphy lambda, setup redux  
+Wire up redux using typescript  
+Integrate components  
+Styling and UX testing  
+Infinite Scroll  
+Original Image Overlay  
+
+## TODO (What I would do with more time)
+Snapshot tests and unit tests around reducers, actions, and other functions  
+Fix bugs (scrolling and opening images doesn't work on mobile, closing the modal, handling bad data expectations )  
+Leverage the share api when available to share gifs from a device  
+Meet PWA specifications  
+Simple animations to make the app more engaging to use  
+Provide search keywords suggestions via giphy api  

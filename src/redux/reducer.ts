@@ -22,7 +22,7 @@ function gifs(
     case RECEIVE_GIFS:
       return Object.assign({}, state, {
         isFetching: false,
-        data: action.data
+        data: action.offset > 0 ? state.data.concat(action.data) : action.data
       })
     default:
       return state

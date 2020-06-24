@@ -17,7 +17,7 @@ exports.handler = async (event) => {
         if (event.queryStringParameters && event.queryStringParameters.q && event.queryStringParameters.q !== '') {
             url = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.GIPHY_API_KEY}&offset=${event.queryStringParameters.offset || 0}&limit=25&q=${event.queryStringParameters.q}`;
         } else {
-            url = `https://api.giphy.com/v1/gifs/trending?api_key=${process.env.GIPHY_API_KEY}`;
+            url = `https://api.giphy.com/v1/gifs/trending?api_key=${process.env.GIPHY_API_KEY}&offset=${(event.queryStringParameters && event.queryStringParameters.offset) || 0}&limit=25`;
         }
 
         console.log('url', url);

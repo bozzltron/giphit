@@ -44,6 +44,8 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Dev log
-June 19 - Initial project setup (React with Typescript, Amplify) and deployment to AWS test = 1 hour
-June 20 - Implement, deploy, and test giphy lambda, setup redux = 1 hr
-June 22 - Wire up redux using typescript = 3hr 
+Initial project setup (React with Typescript, Amplify) and deployment test 
+Implement, deploy, and test giphy lambda, setup redux 
+Wire up redux using typescript 
+Integrate components
+Styling and UX testing

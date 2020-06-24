@@ -3,12 +3,14 @@ export const RECEIVE_GIFS = 'RECEIVE_GIFS'
 
 export interface  RequestGifsAction {
   type: typeof REQUEST_GIFS,
-  query: string
+  query: string,
+  offset: number
 }
 
 export interface  ReceiveGifsAction {
   type: typeof RECEIVE_GIFS,
   query: string,
+  offset: number,
   data: object
 }
 

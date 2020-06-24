@@ -68,7 +68,7 @@
 				"Timeout": "25",
 				"Code": {
 					"S3Bucket": "amplify-giphit-dev-161359-deployment",
-					"S3Key": "amplify-builds/giphy-6b2b5548763652356955-build.zip"
+					"S3Key": "amplify-builds/giphy-4b7457674364364f5430-build.zip"
 				}
 			}
 		},

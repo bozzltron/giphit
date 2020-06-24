@@ -12,7 +12,10 @@ function Search() {
   const dispatch = useDispatch();
   const gifs = useSelector((state: RootState) => state.gifs)
   const offset = 25;
-  const placeholders = new Array(offset)
+  const placeholders = []
+  for (let i=0; i < offset; i++) {
+    placeholders.push("");
+  }
   console.log("gifs", gifs);
   
   useEffect(() => {
@@ -28,11 +31,11 @@ function Search() {
       </header>
       <div className="container">
         {
-          (gifs && gifs.data && gifs.data.length > 0) ? gifs.data.map((gif: any, i:number)=>
+          (!gifs.isFetching) ? gifs.data.map((gif: any, i:number)=>
             <div className="item">
               <img key={i} src={ supportsWebP ? gif.images.preview_webp.url : gif.images.preview_gif.url } alt={gif.title} />
             </div>
-          ) : placeholders.map(()=><div className="item"><div className="placeholder"></div></div>)
+          ) : placeholders.map((item, i)=><div key={i} className="item"><div className="placeholder"></div></div>)
         }
       </div>
     </div>

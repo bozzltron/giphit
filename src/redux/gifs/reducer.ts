@@ -1,7 +1,7 @@
 import { ActionTypes, GifState } from './types'
 import {
   REQUEST_GIFS,
-  RECEIVE_GIFS,
+  RECEIVE_GIFS
 } from './actions'
 
 const initialState: GifState = {

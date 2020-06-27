@@ -137,3 +137,7 @@ button{
   border:none !important;
   text-align: center !important;
 }
+
+.closeIcon {
+  width:20px;
+}

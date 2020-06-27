@@ -12,6 +12,7 @@ function Search() {
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
   const gifs = useSelector((state: RootState) => state.gifs)
+  const ui = useSelector((state: RootState) => state.ui)
   const placeholders = [];
   for(let i=0; i<25; i++){
     placeholders.push("");
@@ -45,6 +46,8 @@ function Search() {
         {
           (gifs.data.length) ? gifs.data.map((gif: any, i:number)=>
             <Gif key={i} 
+              id={gif.id}
+              showOriginalId={ui.showOriginalId}
               preview={supportsWebP ? gif.images.preview_webp.url : gif.images.preview_gif.url} 
               original={supportsWebP ? gif.images.original.webp :  gif.images.original.url } 
               title={gif.title}  />

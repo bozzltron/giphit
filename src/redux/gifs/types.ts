@@ -14,7 +14,9 @@ interface ReceiveGifAction {
 }
 
 export interface Gif {
-  images: MediaTypes
+  id: string,
+  images: MediaTypes,
+  showOriginal?: boolean
 }
 
 interface MediaTypes {

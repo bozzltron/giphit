@@ -1,33 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import Modal from 'react-modal';
+import { useDispatch } from 'react-redux'
+import { showOriginal } from './redux/ui/actions'
+import closeIcon from './close.svg';
 
 type GifProps = {
+  id: string,
   title: string,
   preview: string,
-  original: string
+  original: string,
+  showOriginalId: string
 }
 
 Modal.setAppElement('#root')
 
-function Gif({preview, original, title}: GifProps) {
-  let [showOriginal, setShowOriginal] = useState(false);
-  let [showAnimation, setShowAnimation] = useState(false);
-
-  useEffect(()=>{
-    setShowAnimation(true);
-  },[])
-
-  function close(){
-    console.log("close!")
-    setShowOriginal(false);
-  }
+function Gif({id, preview, original, title, showOriginalId}: GifProps) {
+  const dispatch = useDispatch();
 
   return (
-    <div className="item" onClick={()=>{ setShowOriginal(true) }}>
-      <img src={preview} alt={title} className={showAnimation ? "zoomin": ""} />
-      <Modal isOpen={showOriginal} onRequestClose={close}>
-        <img src={original} alt={title} onClick={close} />
+    <div className="item" onClick={()=>{ dispatch(showOriginal(id)); }}>
+      <img src={preview} alt={title} />
+      <Modal isOpen={id === showOriginalId}>
+        <img src={original} alt={title} /> <br />
+        <button onClick={(e)=>{ e.stopPropagation(); dispatch(showOriginal("")); }}>
+          <img className="closeIcon" src={closeIcon} alt="close" />
+        </button>
       </Modal>
     </div> 
   );

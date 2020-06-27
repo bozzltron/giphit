@@ -12,8 +12,10 @@ function Search() {
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
   const gifs = useSelector((state: RootState) => state.gifs)
-  const offsetAmount = 25;
-  const placeholders = new Array(offsetAmount)
+  const placeholders = [];
+  for(let i=0; i<25; i++){
+    placeholders.push("");
+  }
 
   useEffect(() => {
     // Load trending gifs initially
@@ -49,7 +51,7 @@ function Search() {
           ) : null
         }
         {
-          (gifs.isFetching) ? placeholders.map((item, i)=><div key={i} className="item"><div className="placeholder"></div></div>) : null
+          gifs.isFetching || gifs.data.length === 0 ? placeholders.map((item, i)=><div key={i} className="item"><div className="placeholder"></div></div>) : null
         }
       </div>
     </div>

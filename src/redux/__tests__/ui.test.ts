@@ -5,7 +5,7 @@ describe('gif', () => {
   describe('reducer', () => {
 
     it('SHOW_ORIGINAL', () => {
-      expect(uiReducer({showOriginalId: '', query: '', offset: 0}, { type:'SHOW_ORIGINAL', id: 'test'}))
+      expect(uiReducer({showOriginalId: '', query: '', offset: 0, useWebp: false}, { type:'SHOW_ORIGINAL', id: 'test'}))
         .toEqual({
           showOriginalId: 'test',
           query: '',
@@ -14,7 +14,7 @@ describe('gif', () => {
     })
 
     it('QUERY', () => {
-      expect(uiReducer({showOriginalId: '', query: '', offset: 0}, { type:'QUERY', query: 'test'}))
+      expect(uiReducer({showOriginalId: '', query: '', offset: 0, useWebp: false}, { type:'QUERY', query: 'test'}))
         .toEqual({
           showOriginalId: '',
           query: 'test',
@@ -23,11 +23,21 @@ describe('gif', () => {
     })
 
     it('OFFSET', () => {
-      expect(uiReducer({showOriginalId: '', query: '', offset: 0}, { type:'OFFSET', offset: 25}))
+      expect(uiReducer({showOriginalId: '', query: '', offset: 0, , useWebp: false}, { type:'OFFSET', offset: 25}))
         .toEqual({
           showOriginalId: '',
           query: '',
           offset: 25
+        })
+    })
+
+    it('USE_WEBP', () => {
+      expect(uiReducer({showOriginalId: '', query: '', offset: 0, useWebp: false}, { type:'USE_WEBP', useWebp: true}))
+        .toEqual({
+          showOriginalId: '',
+          query: '',
+          offset: 25,
+          useWebp: true
         })
     })
 

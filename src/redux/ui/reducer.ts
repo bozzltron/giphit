@@ -2,7 +2,8 @@ import { ActionTypes, UIState } from './types'
 import {
   SHOW_ORIGINAL,
   QUERY,
-  OFFSET
+  OFFSET,
+  USE_WEBP
 } from './actions'
 
 const initialState: UIState = {
@@ -19,6 +20,8 @@ export function uiReducer(state = initialState, action: ActionTypes) {
       return Object.assign({}, state, {query: action.query})
     case OFFSET:
       return Object.assign({}, state, {offset: action.offset})
+    case USE_WEBP:
+      return Object.assign({}, state, {useWebp: action.useWebp})
     default:
       return state
   }

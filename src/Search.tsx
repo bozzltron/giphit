@@ -2,20 +2,20 @@ import React, { useEffect } from 'react';
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux'
 import { getGifs } from './redux/gifs/actions'
-import { setQuery, setOffset } from './redux/ui/actions'
+import { setQuery, setOffset, setUseWebp } from './redux/ui/actions'
 import { RootState } from './redux/reducer'
-import useWebP from './useWebp'
+import canUseWebP from './canUseWebp'
 import searchIcon from './search-icon.svg';
 import Gif from './Gif'
 
 function Search() {
-  const supportsWebP = useWebP();
   const dispatch = useDispatch();
   const data = useSelector((state: RootState) => state.gifs.data);
   const isFetching = useSelector((state: RootState) => state.gifs.isFetching);
   const query = useSelector((state: RootState) => state.ui.query);
   const offset = useSelector((state: RootState) => state.ui.offset);
   const showOriginalId = useSelector((state: RootState) => state.ui.showOriginalId);
+  const useWebp = useSelector((state: RootState) => state.ui.useWebp);
   const offsetAmount = 25;
   const placeholders = [];
   for(let i=0; i<offsetAmount; i++){
@@ -26,6 +26,7 @@ function Search() {
     // Load trending gifs initially
     console.log('initial load of gifs')
     dispatch(getGifs(query, offset))
+    dispatch(setUseWebp(canUseWebP()));
   },[]);
 
   useEffect(() => {
@@ -58,8 +59,8 @@ function Search() {
             <Gif key={i} 
               id={gif.id}
               showOriginalId={showOriginalId}
-              preview={supportsWebP ? gif.images.preview_webp.url : gif.images.preview_gif.url} 
-              original={supportsWebP ? gif.images.original.webp :  gif.images.original.url } 
+              preview={useWebp ? gif.images.preview_webp.url : gif.images.preview_gif.url} 
+              original={useWebp ? gif.images.original.webp :  gif.images.original.url } 
               title={gif.title}  />
           ) : null
         }

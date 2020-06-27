@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="item"
+  onClick={[Function]}
+>
+  <img
+    alt="title"
+    src="preview.img"
+  />
+  <div />
+</div>
+`;

@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "@types/jest": "^24.9.1",
     "@types/node": "^12.12.47",
@@ -14,9 +13,7 @@
     "@types/react-redux": "^7.1.9",
     "@types/react-transition-group": "^4.4.0",
     "aws-amplify": "^3.0.18",
-    "cross-fetch": "^3.0.5",
     "jsdom": "^16.2.2",
-    "node-fetch": "^2.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-modal": "^3.11.2",
@@ -25,7 +22,7 @@
     "react-test-renderer": "^16.13.1",
     "react-transition-group": "^4.4.1",
     "redux": "^4.0.5",
-    "redux-promise-middleware": "^6.1.2",
+    "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.3.0",
     "typescript": "^3.7.5"
   },
@@ -49,5 +46,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/react": "^9.5.0",
+    "@types/react-test-renderer": "^16.9.2",
+    "@types/redux-mock-store": "^1.0.2"
   }
 }

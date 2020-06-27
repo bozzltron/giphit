@@ -15,18 +15,7 @@ interface ReceiveGifAction {
 
 export interface Gif {
   id: string,
-  images: MediaTypes,
-  showOriginal?: boolean
-}
-
-interface MediaTypes {
-  preview_webp: object,
-  preview_gif: object,
-  original: object
-}
-
-interface Image {
-  url: string
+  images: object,
 }
 
 export interface GifState { 

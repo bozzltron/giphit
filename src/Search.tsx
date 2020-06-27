@@ -26,7 +26,7 @@ function Search() {
   useEffect(() => {
     // Listen for scroll bottom to add more content
     let loadMoreGifs = () => {
-      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !gifs.isFetching) {
         dispatch(getGifs(query, gifs.data.length));
       }
     }

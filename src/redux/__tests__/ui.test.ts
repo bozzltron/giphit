@@ -9,7 +9,8 @@ describe('gif', () => {
         .toEqual({
           showOriginalId: 'test',
           query: '',
-          offset: 0
+          offset: 0,
+          useWebp: false
         })
     })
 
@@ -18,16 +19,18 @@ describe('gif', () => {
         .toEqual({
           showOriginalId: '',
           query: 'test',
-          offset: 0
+          offset: 0,
+          useWebp: false
         })
     })
 
     it('OFFSET', () => {
-      expect(uiReducer({showOriginalId: '', query: '', offset: 0, , useWebp: false}, { type:'OFFSET', offset: 25}))
+      expect(uiReducer({showOriginalId: '', query: '', offset: 0, useWebp: false}, { type:'OFFSET', offset: 25}))
         .toEqual({
           showOriginalId: '',
           query: '',
-          offset: 25
+          offset: 25,
+          useWebp: false
         })
     })
 
@@ -36,7 +39,7 @@ describe('gif', () => {
         .toEqual({
           showOriginalId: '',
           query: '',
-          offset: 25,
+          offset: 0,
           useWebp: true
         })
     })

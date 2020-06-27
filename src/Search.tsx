@@ -20,6 +20,7 @@ function Search() {
 
   useEffect(() => {
     // Load trending gifs initially
+    console.log('initial load of gifs')
     dispatch(getGifs('', 0))
   },[]);
 
@@ -27,6 +28,7 @@ function Search() {
     // Listen for scroll bottom to add more content
     let loadMoreGifs = () => {
       if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !gifs.isFetching) {
+        console.log('getting more gifs')
         dispatch(getGifs(query, gifs.data.length));
       }
     }

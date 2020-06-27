@@ -1,6 +1,6 @@
-import configureStore from 'redux-mock-store'
 import {gifsReducer} from '../gifs/reducer'
-import Gif from '../../Gif'
+import {API} from 'aws-amplify'
+import { getGifs } from '../gifs/actions'
 
 describe('gif', () => {
 
@@ -8,6 +8,13 @@ describe('gif', () => {
 
     it('REQUEST_GIFS', () => {
       expect(gifsReducer({isFetching: false, data:[]}, { type:'REQUEST_GIFS', query: '', offset:0, data:undefined}))
+        .toEqual({
+          isFetching: true, data:[]
+        })
+    })
+
+    it('REQUEST_GIFS should clear data if offset is 0', () => {
+      expect(gifsReducer({isFetching: false, data:[{}]}, { type:'REQUEST_GIFS', query: '', offset:0, data:undefined}))
         .toEqual({
           isFetching: true, data:[]
         })
@@ -27,6 +34,27 @@ describe('gif', () => {
         })
     })
 
+  })
+
+  describe('actions', () => {
+
+    it('getGifs - initial load', async () => {
+      let dispatch = jest.fn();
+      let spy = jest
+          .spyOn(API, 'get')
+          .mockResolvedValue({ data: [] })
+      await getGifs('', 0)(dispatch);
+      expect(spy).toHaveBeenCalledWith('giphy', '/gifs', undefined)
+    })
+
+    it('getGifs - search', async () => {
+      let dispatch = jest.fn();
+      let spy = jest
+          .spyOn(API, 'get')
+          .mockResolvedValue({ data: [] })
+      await getGifs('tiger', 25)(dispatch);
+      expect(spy).toHaveBeenCalledWith('giphy', '/gifs', {queryStringParameters:{q: 'tiger', offset:25}})
+    })
   })
 
 })

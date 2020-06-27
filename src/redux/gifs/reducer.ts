@@ -1,4 +1,4 @@
-import { ActionTypes, GifState } from './types'
+import { ActionTypes, GifState, Gif } from './types'
 import {
   REQUEST_GIFS,
   RECEIVE_GIFS
@@ -14,7 +14,7 @@ export function gifsReducer(state = initialState, action: ActionTypes) {
     case REQUEST_GIFS:
       return Object.assign({}, state, {isFetching: true, data: action.offset === 0 ? []: state.data })
     case RECEIVE_GIFS:
-      return Object.assign({}, state, {data: action.data, isFetching: false})
+      return Object.assign({}, state, {isFetching: false, data: action.offset > 0 ? state.data.concat(action.data || []) : action.data})
     default:
       return state
   }

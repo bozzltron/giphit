@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 import { useSelector, useDispatch } from 'react-redux'
 import { getGifs } from './redux/gifs/actions'
+import { setQuery, setOffset } from './redux/ui/actions'
 import { RootState } from './redux/reducer'
 import useWebP from './useWebp'
 import searchIcon from './search-icon.svg';
@@ -9,54 +10,61 @@ import Gif from './Gif'
 
 function Search() {
   const supportsWebP = useWebP();
-  const [query, setQuery] = useState('');
   const dispatch = useDispatch();
-  const gifs = useSelector((state: RootState) => state.gifs)
-  const ui = useSelector((state: RootState) => state.ui)
+  const data = useSelector((state: RootState) => state.gifs.data);
+  const isFetching = useSelector((state: RootState) => state.gifs.isFetching);
+  const query = useSelector((state: RootState) => state.ui.query);
+  const offset = useSelector((state: RootState) => state.ui.offset);
+  const showOriginalId = useSelector((state: RootState) => state.ui.showOriginalId);
+  const offsetAmount = 25;
   const placeholders = [];
-  for(let i=0; i<25; i++){
+  for(let i=0; i<offsetAmount; i++){
     placeholders.push("");
   }
 
   useEffect(() => {
     // Load trending gifs initially
     console.log('initial load of gifs')
-    dispatch(getGifs('', 0))
+    dispatch(getGifs(query, offset))
   },[]);
 
   useEffect(() => {
     // Listen for scroll bottom to add more content
     let loadMoreGifs = () => {
-      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !gifs.isFetching) {
-        console.log('getting more gifs')
-        dispatch(getGifs(query, gifs.data.length));
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && !isFetching) {
+        let newOffset = offset + offsetAmount;
+        console.log("getting more gifs", "offset", offset, "newOffse", newOffset);
+        dispatch(setOffset(newOffset))
+        dispatch(getGifs(query, newOffset))
       }
     }
     window.addEventListener('scroll', loadMoreGifs);
     return () => {
       window.removeEventListener('scroll', loadMoreGifs);
     }
-  },[gifs]);
+  },[dispatch, data, isFetching, offset, query]);
 
   return (
     <div className="app">
       <header className="search">
-        <input type="search" placeholder="Search for gifs" onChange={(e)=>{ setQuery(e.target.value) }} />
-        <button onClick={()=>{ dispatch(getGifs(query, 0)) }}><img src={searchIcon} alt="search icon" /></button>
+        <form onSubmit={(e)=>{ e.preventDefault(); dispatch(getGifs(query, 0)) }}>
+          <input type="search" placeholder="Search for gifs" onChange={(e)=>{ dispatch(setQuery(e.target.value)) }} />
+          <button><img src={searchIcon} alt="search icon" /></button>
+        </form>
       </header>
       <div className="container">
         {
-          (gifs.data.length) ? gifs.data.map((gif: any, i:number)=>
+          (data.length) ? data.map((gif: any, i:number)=>
             <Gif key={i} 
               id={gif.id}
-              showOriginalId={ui.showOriginalId}
+              showOriginalId={showOriginalId}
               preview={supportsWebP ? gif.images.preview_webp.url : gif.images.preview_gif.url} 
               original={supportsWebP ? gif.images.original.webp :  gif.images.original.url } 
               title={gif.title}  />
           ) : null
         }
         {
-          gifs.isFetching || gifs.data.length === 0 ? placeholders.map((item, i)=><div key={i} className="item"><div className="placeholder"></div></div>) : null
+         isFetching || data.length === 0 ? placeholders.map((item, i)=><div key={i} className="item"><div className="placeholder"></div></div>) : null
         }
       </div>
     </div>

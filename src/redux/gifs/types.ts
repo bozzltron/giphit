@@ -3,7 +3,7 @@ interface RequestGifAction {
   type: string,
   query: string,
   offset: number,
-  data: undefined
+  data?: Array<Gif>
 }
 
 interface ReceiveGifAction {
@@ -20,7 +20,7 @@ export interface Gif {
 
 export interface GifState { 
   isFetching: boolean,
-  data: Array<object>
+  data: Array<Gif>
 }
 
 export type ActionTypes = RequestGifAction | ReceiveGifAction

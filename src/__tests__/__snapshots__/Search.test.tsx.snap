@@ -7,19 +7,21 @@ exports[`renders correctly 1`] = `
   <header
     className="search"
   >
-    <input
-      onChange={[Function]}
-      placeholder="Search for gifs"
-      type="search"
-    />
-    <button
-      onClick={[Function]}
+    <form
+      onSubmit={[Function]}
     >
-      <img
-        alt="search icon"
-        src="search-icon.svg"
+      <input
+        onChange={[Function]}
+        placeholder="Search for gifs"
+        type="search"
       />
-    </button>
+      <button>
+        <img
+          alt="search icon"
+          src="search-icon.svg"
+        />
+      </button>
+    </form>
   </header>
   <div
     className="container"
